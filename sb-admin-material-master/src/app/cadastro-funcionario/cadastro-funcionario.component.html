@@ -1,0 +1,60 @@
+<div class="container">
+  <h1>Cadastrar Funcionarios</h1>
+  <form [formGroup]="Form" class="col-md-12">
+    <mat-form-field>
+      <input matInput placeholder="Nome" type="text" formControlName="nome" [(ngModel)]="dado_usuario.nome">
+      <mat-error *ngIf="isControlHasError('nome','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Data Admisão" type="text" formControlName="data_ad"
+        [(ngModel)]="dado_usuario.data_ad" mask="00/00/0000">
+      <mat-error *ngIf="isControlHasError('data_ad','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Codigo" type="text" formControlName="codigo" [(ngModel)]="dado_usuario.codigo"
+        mask="00000">
+      <mat-error *ngIf="isControlHasError('codigo','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="CPF" type="text" formControlName="cpf" [(ngModel)]="dado_usuario.cpf"
+        mask="000.000.000-00">
+      <mat-error *ngIf="isControlHasError('cpf','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Cargo" type="text" formControlName="cargo" [(ngModel)]="dado_usuario.cargo">
+      <mat-error *ngIf="isControlHasError('cargo','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <!-- <input matInput placeholder="Unidade" type="text" formControlName="filial" [(ngModel)]="dado_usuario.filial">
+        <mat-error *ngIf="isControlHasError('filial','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error> -->
+      <mat-label>Cars</mat-label>
+      <select matNativeControl required formControlName="filial" [(ngModel)]="dado_usuario.filial">
+        <option value=""></option>
+        <option value="Alphaville">Alphaville</option>
+        <option value="Vila Olimpia">Vila Olimpia</option>
+      </select>
+      <mat-error *ngIf="isControlHasError('filial','required')">
+        <strong>{{message_required}}</strong>
+      </mat-error>
+      <!-- {{dado_usuario.filial}} -->
+    </mat-form-field>
+
+
+    <div>
+      <button type="submit" class="btn btn-primary btn-elevate kt-login__btn-primary"
+        [disabled]="Form.pristine || Form.invalid" (click)="onSubmit(dado_usuario)">Salvar</button>
+    </div>
+  </form>
+</div>

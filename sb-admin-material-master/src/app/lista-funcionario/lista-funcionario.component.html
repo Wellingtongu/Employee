@@ -1,0 +1,75 @@
+<div class="container" *ngIf="!show_Edit">
+  <h1>Lista Funcionarios</h1>
+  <table class="table">
+    <thead class="thead-dark">
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Unidade</th>
+      <th>Açao</th>
+      <th><button ion-button block (click)="cadastrar()">new + </button></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dado of dado_usuario">
+        <td>{{ dado.id }}</td>
+        <td>{{ dado.nome }}</td>
+        <td>{{ dado.filial }}</td>
+        <td>
+          <button class="btn btn-warning" (click)='Edit(dado)'>Edit</button>&nbsp;
+          <button class="btn btn-danger" (click)='Delete(dado)'>Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="container" *ngIf="show_Edit">
+  <div class="row">
+    <h1>Editar Funcionario</h1>
+    <form [formGroup]="FormEdit" class="col-md-12" (ngSubmit)="Atualizar()">
+      <mat-form-field>
+        <input matInput placeholder="Nome" type="text" formControlName="nome" [(ngModel)]="dado_edit.nome">
+        <mat-error *ngIf="isControlHasError('nome','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Data Admisão" type="text" formControlName="data_ad" [(ngModel)]="dado_edit.data_ad" mask="00/00/0000">
+        <mat-error *ngIf="isControlHasError('data_ad','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Codigo" type="text" formControlName="codigo" [(ngModel)]="dado_edit.codigo" mask="00000">
+        <mat-error *ngIf="isControlHasError('codigo','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="CPF" type="text" formControlName="cpf" [(ngModel)]="dado_edit.cpf"  mask="000.000.000-00">
+        <mat-error *ngIf="isControlHasError('cpf','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Cargo" type="text" formControlName="cargo" [(ngModel)]="dado_edit.cargo">
+        <mat-error *ngIf="isControlHasError('cargo','required')">
+          <strong>{{message_required}}</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Unidade" type="text" formControlName="filial" [(ngModel)]="dado_edit.filial">
+          <mat-error *ngIf="isControlHasError('filial','required')">
+            <strong>{{message_required}}</strong>
+          </mat-error>
+        </mat-form-field>
+  
+  
+      <div>
+        <button type="submit" class="btn btn-primary btn-elevate kt-login__btn-primary"
+          [disabled]="FormEdit.pristine || FormEdit.invalid" (click)="onSubmit(dado_edit)">Atualizar</button>&nbsp;
+          <button class="btn btn-danger" (click)="Cancel()" block>Cancel</button>
+      </div>
+   
+    </form>
+  </div>
+</div>
